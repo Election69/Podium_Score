@@ -71,7 +71,7 @@
             font-family: 'Sarabun', sans-serif;
         }
         
-        /* Filters Area */
+        /* Filters Area (Desktop Default) */
         .controls-area { 
             display: flex; 
             align-items: center; 
@@ -97,14 +97,10 @@
 
         /* --- Main Layout --- */
         .main-content {
-            flex-grow: 1; 
-            padding: 20px 15px; 
-            width: 100%; 
-            max-width: 100%;
-            margin: 0;
+            flex-grow: 1; padding: 20px 15px; width: 100%; max-width: 100%; margin: 0;
         }
 
-        /* --- Podium Colors --- */
+        /* --- Podium Section --- */
         .bg-no-1 { background: linear-gradient(180deg, #A1887F 0%, #5D4037 100%); border-color: #8D6E63; }
         .bg-no-2 { background: linear-gradient(180deg, #4FC3F7 0%, #0288D1 100%); border-color: #29B6F6; }
         .bg-no-3 { background: linear-gradient(180deg, #81C784 0%, #388E3C 100%); border-color: #66BB6A; }
@@ -114,15 +110,10 @@
         .bg-no-7 { background: linear-gradient(180deg, #90A4AE 0%, #455A64 100%); border-color: #78909C; }
         .bg-no-8 { background: linear-gradient(180deg, #F06292 0%, #C2185B 100%); border-color: #EC407A; }
 
-        /* --- Podium Section --- */
         .podium-wrapper {
             display: flex; justify-content: center; align-items: flex-end;
-            height: 450px; 
-            margin-bottom: 40px; 
-            padding-top: 10px;
-            gap: 15px;
+            height: 450px; margin-bottom: 40px; padding-top: 10px; gap: 15px;
         }
-        
         .podium-card {
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             text-align: center; position: relative; transition: all 0.5s ease;
@@ -130,7 +121,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
             border-top: 6px solid #ddd;
         }
-        
         .podium-card.rank-1 { order: 2; width: 36%; z-index: 10; height: 400px; }
         .podium-card.rank-2 { order: 1; width: 30%; z-index: 5; height: 340px; }
         .podium-card.rank-3 { order: 3; width: 30%; z-index: 5; height: 300px; }
@@ -237,7 +227,6 @@
         .stat-progress-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
         .stat-desc { font-size: 0.8rem; font-weight: 700; margin-top: 2px; }
 
-        /* --- 🖥️ Desktop --- */
         @media (min-width: 769px) {
             .fixed-footer { padding: 12px 20px; }
             .stat-footer-grid { display: flex; justify-content: center; gap: 40px; }
@@ -265,32 +254,63 @@
             }
 
             /* 2. Hide Icon on Mobile */
-            .brand-icon {
-                display: none !important; 
-            }
+            .brand-icon { display: none !important; }
 
-            /* 3. Text Sizes */
             .brand-line-1 { font-size: 1.35rem; margin-bottom: 2px; }
             .brand-line-2 { font-size: 0.9rem; font-weight: 300; opacity: 0.85; }
 
-            /* 4. Filters: Center & Fit */
+            /* 3. Mobile Filters (2 Lines Grid Layout) */
             .controls-area {
                 width: 100%;
-                justify-content: center;
-                overflow-x: auto;
-                background: rgba(0,0,0,0.15); /* เพิ่มความชัดของพื้นหลัง */
-                padding: 6px;
+                display: grid; /* ใช้ Grid เพื่อจัด Layout */
+                grid-template-columns: 1fr 1fr 1fr 1.3fr; /* แบ่ง 4 คอลัมน์ (Dropdown กว้างหน่อย) */
                 gap: 8px;
+                background: transparent;
+                padding: 0;
+                overflow: visible;
+                border: none;
             }
-            
-            .btn-filter { padding: 4px 12px; font-size: 0.8rem; }
-            .custom-select { padding: 4px 20px 4px 10px; font-size: 0.8rem; }
 
-            /* 5. Podium Spacing (ช่องว่าง) */
+            /* ทำให้ปุ่มใน #amphoeGroup เป็นส่วนหนึ่งของ Grid */
+            #amphoeGroup { display: contents; }
+
+            /* บรรทัดที่ 1: ปุ่ม "ทั้งหมด" เต็มความกว้าง */
+            #amphoeGroup button:first-child {
+                grid-column: 1 / -1; /* Span ทั้ง 4 คอลัมน์ */
+                width: 100%;
+                background: var(--primary-color);
+                border: 1px solid rgba(255,255,255,0.3);
+                font-weight: 800;
+            }
+
+            /* บรรทัดที่ 2: ปุ่มอำเภอ 3 ปุ่ม + Dropdown */
+            #amphoeGroup button:not(:first-child) {
+                grid-column: span 1; /* กินพื้นที่คนละ 1 ช่อง */
+                padding: 6px 2px;
+                font-size: 0.75rem;
+                text-align: center;
+            }
+
+            .controls-area > div:last-child {
+                grid-column: span 1; /* Dropdown กินพื้นที่ช่องสุดท้าย */
+                min-width: 0;
+            }
+
+            .divider { display: none; } /* ซ่อนเส้นคั่น */
+
+            .custom-select {
+                padding: 6px 5px; 
+                font-size: 0.75rem; 
+                width: 100%;
+                background-position: right 2px center;
+                text-align: center;
+            }
+
+            /* Main Content Spacing */
             .podium-wrapper { 
                 height: 380px; 
                 gap: 8px; 
-                margin-top: 30px; /* เพิ่มช่องว่างไม่ให้ซ้อน Header */
+                margin-top: 30px; 
             }
             
             .podium-card { padding: 15px 5px; }
@@ -321,7 +341,7 @@
         </div>
         
         <div class="controls-area">
-            <div id="amphoeGroup" style="display:flex; gap:5px;"></div>
+            <div id="amphoeGroup"></div>
             <div class="divider bg-white opacity-25" style="width:1px; height:20px;"></div>
             <div style="position:relative;">
                 <select id="selectTambon" class="custom-select" onchange="filterData()" disabled>
@@ -332,7 +352,6 @@
     </div>
 
     <div class="main-content">
-        
         <div id="podiumSection">
             <div class="text-center text-muted py-5"><i class="fas fa-spinner fa-spin fa-2x"></i><br>กำลังโหลดข้อมูล...</div>
         </div>
@@ -382,7 +401,6 @@
             { no: 7, party: "พรรคพลังประชารัฐ", name: "นายไซดี เจ๊ะหามะ", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/7e761e0a5c9a1d1be.png"},
             { no: 8, party: "พรรคประชากรไทย", name: "นางสาวซาลีฮะห์ เจ๊ะหามะ", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/8f7b21c2713bbba6a.png"}    
         ];
-
         const colorMap = {
             1: '#8D6E63', 2: '#29B6F6', 3: '#66BB6A', 4: '#FFA726',
             5: '#42A5F5', 6: '#EF5350', 7: '#78909C', 8: '#EC407A'
