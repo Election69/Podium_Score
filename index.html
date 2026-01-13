@@ -27,80 +27,31 @@
         /* --- Header --- */
         .top-header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white; 
-            padding: 15px 25px;
+            color: white; padding: 15px 25px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between;
-            gap: 20px; 
-            flex-shrink: 0;
-            position: relative; 
-            z-index: 100;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 20px; flex-shrink: 0; position: relative; z-index: 100;
         }
-
-        .brand-section { 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-        }
-
-        .brand-icon {
-            font-size: 2.8rem;
-            color: rgba(255,255,255,0.9);
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .brand-text-wrapper {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .brand-line-1 {
-            font-weight: 800;
-            font-size: 1.6rem;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .brand-line-2 {
-            font-weight: 400;
-            font-size: 1rem;
-            opacity: 0.9;
-            font-family: 'Sarabun', sans-serif;
-        }
+        .brand-section { display: flex; align-items: center; gap: 15px; }
+        .brand-icon { font-size: 2.8rem; color: rgba(255,255,255,0.9); text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .brand-text-wrapper { display: flex; flex-direction: column; line-height: 1.2; }
+        .brand-line-1 { font-weight: 800; font-size: 1.6rem; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .brand-line-2 { font-weight: 400; font-size: 1rem; opacity: 0.9; font-family: 'Sarabun', sans-serif; }
         
-        /* Filters Area (Desktop Default) */
         .controls-area { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            background: rgba(255,255,255,0.1);
-            padding: 5px 10px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
+            display: flex; align-items: center; gap: 10px; 
+            background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
         }
-
         .btn-filter {
             background: transparent; border: none; color: rgba(255,255,255,0.8);
-            padding: 6px 15px; border-radius: 20px; white-space: nowrap; font-size: 0.9rem; font-weight: 600;
-            transition: 0.3s;
+            padding: 6px 15px; border-radius: 20px; white-space: nowrap; font-size: 0.9rem; font-weight: 600; transition: 0.3s;
         }
         .btn-filter:hover, .btn-filter.active { background: white; color: var(--primary-color); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         
-        .custom-select {
-            background: rgba(255,255,255,0.9); border: none; color: var(--primary-color);
-            padding: 6px 25px 6px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;
-            cursor: pointer; outline: none; appearance: none;
-        }
-
         /* --- Main Layout --- */
-        .main-content {
-            flex-grow: 1; padding: 20px 15px; width: 100%; max-width: 100%; margin: 0;
-        }
+        .main-content { flex-grow: 1; padding: 20px 15px; width: 100%; max-width: 100%; margin: 0; }
 
-        /* --- Podium Section --- */
+        /* --- Podium --- */
         .bg-no-1 { background: linear-gradient(180deg, #A1887F 0%, #5D4037 100%); border-color: #8D6E63; }
         .bg-no-2 { background: linear-gradient(180deg, #4FC3F7 0%, #0288D1 100%); border-color: #29B6F6; }
         .bg-no-3 { background: linear-gradient(180deg, #81C784 0%, #388E3C 100%); border-color: #66BB6A; }
@@ -110,60 +61,28 @@
         .bg-no-7 { background: linear-gradient(180deg, #90A4AE 0%, #455A64 100%); border-color: #78909C; }
         .bg-no-8 { background: linear-gradient(180deg, #F06292 0%, #C2185B 100%); border-color: #EC407A; }
 
-        .podium-wrapper {
-            display: flex; justify-content: center; align-items: flex-end;
-            height: 450px; margin-bottom: 40px; padding-top: 10px; gap: 15px;
-        }
-        .podium-card {
-            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-            text-align: center; position: relative; transition: all 0.5s ease;
-            background: white; border-radius: 16px; padding: 20px 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
-            border-top: 6px solid #ddd;
-        }
+        .podium-wrapper { display: flex; justify-content: center; align-items: flex-end; height: 450px; margin-bottom: 40px; padding-top: 10px; gap: 15px; }
+        .podium-card { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; position: relative; transition: all 0.5s ease; background: white; border-radius: 16px; padding: 20px 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06); border-top: 6px solid #ddd; }
         .podium-card.rank-1 { order: 2; width: 36%; z-index: 10; height: 400px; }
         .podium-card.rank-2 { order: 1; width: 30%; z-index: 5; height: 340px; }
         .podium-card.rank-3 { order: 3; width: 30%; z-index: 5; height: 300px; }
-
-        .podium-img {
-            width: 90px; height: 90px; object-fit: cover; border-radius: 50%;
-            border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-            margin-bottom: 15px; background: white; margin-top: 15px;
-        }
+        .podium-img { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.15); margin-bottom: 15px; background: white; margin-top: 15px; }
         .rank-1 .podium-img { width: 110px; height: 110px; } 
-
-        .rank-number {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            background: white; color: #333; width: 32px; height: 32px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: 2px solid white;
-        }
-
+        .rank-number { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: white; color: #333; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: 2px solid white; }
         .podium-score { font-weight: 900; line-height: 1; margin-bottom: 10px; letter-spacing: -2px; }
         .rank-1 .podium-score { font-size: 3.5rem; }
         .rank-2 .podium-score { font-size: 2.5rem; }
         .rank-3 .podium-score { font-size: 2.2rem; }
-
         .podium-name { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 4px; line-height: 1.2; }
         .podium-party { font-size: 0.9rem; color: #777; font-weight: 500; }
 
         /* --- Divider --- */
-        .divider-header {
-            display: flex; align-items: center; justify-content: center;
-            margin: 30px 0 20px 0;
-            color: var(--primary-color); font-weight: 800; font-size: 1.1rem;
-        }
+        .divider-header { display: flex; align-items: center; justify-content: center; margin: 30px 0 20px 0; color: var(--primary-color); font-weight: 800; font-size: 1.1rem; }
         .divider-header .line { height: 2px; background: #dce1e6; flex-grow: 1; margin: 0 15px; max-width: 100px; }
 
         /* --- List Cards --- */
         .list-container { display: grid; grid-template-columns: 100%; gap: 10px; padding: 0 5px; }
-        .rank-card {
-            background: white; border-radius: 10px; padding: 12px 15px;
-            display: flex; align-items: center;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-            transition: transform 0.2s; border-left: 6px solid #ddd;
-            width: 100%;
-        }
+        .rank-card { background: white; border-radius: 10px; padding: 12px 15px; display: flex; align-items: center; box-shadow: 0 3px 8px rgba(0,0,0,0.05); transition: transform 0.2s; border-left: 6px solid #ddd; width: 100%; }
         .rc-rank { font-size: 1.1rem; font-weight: 800; color: #bbb; width: 30px; text-align: center; margin-right: 15px; }
         .rc-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 20px; border: 2px solid #f8f9fa; }
         .rc-info { flex-grow: 1; overflow: hidden; }
@@ -171,30 +90,15 @@
         .rc-party { font-size: 0.85rem; color: #777; }
         .rc-score { font-size: 1.4rem; font-weight: 800; }
 
-        /* --- Top Units Section --- */
-        .top-units-container {
-            display: flex; gap: 15px; padding: 5px 5px 15px 5px; overflow-x: auto; scrollbar-width: thin;
-        }
+        /* --- Top Units --- */
+        .top-units-container { display: flex; gap: 15px; padding: 5px 5px 15px 5px; overflow-x: auto; scrollbar-width: thin; }
         .top-units-container::-webkit-scrollbar { height: 6px; }
         .top-units-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
-        .unit-card {
-            background: white; border-radius: 12px; overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.06); border: 1px solid #eee;
-            min-width: 280px; flex: 0 0 auto;
-        }
-        @media (min-width: 1200px) {
-            .top-units-container { display: grid; grid-template-columns: repeat(5, 1fr); overflow-x: visible; padding-bottom: 5px; }
-            .unit-card { min-width: 0; flex: auto; width: 100%; }
-        }
-        .unit-header {
-            background: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #eee;
-            display: flex; justify-content: space-between; align-items: center;
-        }
+        .unit-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.06); border: 1px solid #eee; min-width: 280px; flex: 0 0 auto; }
+        @media (min-width: 1200px) { .top-units-container { display: grid; grid-template-columns: repeat(5, 1fr); overflow-x: visible; padding-bottom: 5px; } .unit-card { min-width: 0; flex: auto; width: 100%; } }
+        .unit-header { background: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .unit-info-col { flex-grow: 1; overflow: hidden; padding-right: 10px; }
-        .unit-name-scroll { 
-            font-weight: 800; color: var(--primary-color); font-size: 0.9rem;
-            white-space: nowrap; overflow-x: auto; scrollbar-width: none;
-        }
+        .unit-name-scroll { font-weight: 800; color: var(--primary-color); font-size: 0.9rem; white-space: nowrap; overflow-x: auto; scrollbar-width: none; }
         .unit-name-scroll::-webkit-scrollbar { display: none; }
         .unit-location { font-size: 0.75rem; color: #666; font-weight: 600; margin-top: 2px; }
         .unit-voted { font-size: 0.9rem; color: #333; font-weight: 700; white-space: nowrap; }
@@ -206,20 +110,24 @@
         .uc-name { font-weight: 600; color: #333; width: 80px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .uc-score { font-weight: 700; color: #333; width: 40px; text-align: right; font-size: 0.8rem; }
 
+        /* --- Search Section --- */
+        .search-container { max-width: 800px; margin: 0 auto; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .search-controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        #s_unit { grid-column: 1 / -1; }
+        .search-select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; color: #333; font-weight: bold; font-size: 0.9rem; outline: none; }
+        .search-select:focus { border-color: var(--primary-color); background-color: #fff; }
+        .search-result-area { min-height: 100px; display: flex; justify-content: center; align-items: center; }
+        
+        .unit-card-large { width: 100%; max-width: 100%; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border: 1px solid #e0e0e0; }
+        .unit-card-large .unit-header { padding: 15px 20px; background: linear-gradient(to right, #f8f9fa, #fff); }
+        .unit-card-large .unit-name-scroll { font-size: 1.1rem; }
+        .unit-card-large .unit-body { padding: 20px; }
+        .unit-card-large .uc-name { width: 140px; }
+
         /* --- Footer --- */
-        .fixed-footer {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: rgba(255, 255, 255, 0.98); border-top: 1px solid #dcdcdc;
-            backdrop-filter: blur(12px); box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
-            z-index: 1000; padding: 10px 15px 15px 15px;
-        }
-        .stat-footer-grid {
-            max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
-        }
-        .stat-box {
-            display: flex; align-items: center; justify-content: center; flex-direction: column;
-            text-align: center; border-right: 1px solid #eee; padding: 0 5px;
-        }
+        .fixed-footer { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.98); border-top: 1px solid #dcdcdc; backdrop-filter: blur(12px); box-shadow: 0 -5px 20px rgba(0,0,0,0.08); z-index: 1000; padding: 10px 15px 15px 15px; }
+        .stat-footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-box { display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; border-right: 1px solid #eee; padding: 0 5px; }
         .stat-box:last-child { border-right: none; }
         .stat-title { font-size: 0.75rem; color: #777; font-weight: 700; text-transform: uppercase; margin-bottom: 2px; }
         .stat-number { font-size: 1.2rem; font-weight: 800; color: #2c3e50; line-height: 1.1; }
@@ -227,7 +135,6 @@
         .stat-progress-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
         .stat-desc { font-size: 0.8rem; font-weight: 700; margin-top: 2px; }
 
-        /* --- 🖥️ Desktop --- */
         @media (min-width: 769px) {
             .fixed-footer { padding: 12px 20px; }
             .stat-footer-grid { display: flex; justify-content: center; gap: 40px; }
@@ -240,106 +147,42 @@
 
         /* --- 📱 Mobile (Responsive Adjustments) --- */
         @media (max-width: 576px) {
-            
-            /* 1. Header Layout */
-            .top-header {
-                flex-direction: column; 
-                padding: 15px 15px 20px 15px;
-                gap: 15px;
-            }
-
-            .brand-section {
-                flex-direction: column;
-                text-align: center;
-                gap: 0;
-            }
-
-            /* 2. ซ่อนไอคอนเมื่อเปิดในมือถือ */
+            .top-header { flex-direction: column; padding: 15px 15px 20px 15px; gap: 15px; }
+            .brand-section { flex-direction: column; text-align: center; gap: 0; }
             .brand-icon { display: none !important; }
-
             .brand-line-1 { font-size: 1.35rem; margin-bottom: 2px; }
             .brand-line-2 { font-size: 0.9rem; font-weight: 300; opacity: 0.85; }
 
-            /* 3. Mobile Filters (New 2-Row Design) */
-            .controls-area {
-                width: 100%;
-                display: grid; /* ใช้ Grid แบ่งโซน */
-                grid-template-columns: 1fr 1fr 1fr 1.3fr; /* 4 ช่องสำหรับแถวที่ 2 */
-                gap: 8px;
-                background: transparent;
-                border: none;
-                padding: 0;
-                overflow: visible; /* ไม่ต้อง Scroll แล้ว */
-            }
-
-            #amphoeGroup { display: contents; /* ให้ลูกๆ ไปอยู่ใน Grid แม่ */ }
-
-            /* 🌟 บรรทัดที่ 1: ปุ่ม "ทั้งหมด" */
-            #amphoeGroup button:first-child {
-                grid-column: 1 / -1; /* ขยายเต็มแถว (Full Width) */
-                background: white;
-                color: var(--primary-color);
-                font-size: 1.1rem;
-                font-weight: 800;
-                border-radius: 12px;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-                padding: 8px;
-                margin-bottom: 5px;
-                border: 2px solid white;
-            }
-            #amphoeGroup button:first-child.active {
-                border-color: #f1c40f; /* สีทองเมื่อเลือกอยู่ */
-                color: #d35400;
-            }
-
-            /* 🌟 บรรทัดที่ 2: กรอบใสรวมปุ่มอำเภอ + Dropdown */
-            /* ใส่กรอบจำลองโดยการใส่พื้นหลังให้ปุ่มแต่ละตัวดูเป็นชุดเดียวกัน */
-            
-          #amphoeGroup button:not(:first-child), 
-            .controls-area > div:last-child {
-                background: rgba(255, 255, 255, 0.15);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                border-radius: 8px;
-                color: white;
-                font-size: 0.8rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 35px;
-                transition: all 0.2s; /* เพิ่ม Transition ให้นุ่มนวล */
-            }
-
-            /* ✅✅✅ เพิ่มส่วนนี้ครับ: เมื่อปุ่มอำเภอถูกเลือก (Active) ✅✅✅ */
-            #amphoeGroup button:not(:first-child).active {
-                background: white !important;       /* พื้นหลังขาว */
-                color: var(--primary-color) !important; /* ตัวหนังสือสีน้ำเงินเข้ม */
-                font-weight: 800;                   /* ตัวหนา */
-                border: none;                       /* เอาเส้นขอบออก */
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* เพิ่มเงา */
-            }
-            /* ✅✅✅ จบส่วนที่เพิ่ม ✅✅✅ */
-
-            /* Dropdown ในบรรทัด 2 */
-            .custom-select {
-                background: transparent;
-                color: white;
-                border: none;
-                padding: 0 5px;
-                font-size: 0.8rem;
-                text-align: center;
-                width: 100%;
-                height: 100%;
-            }
-            /* ซ่อนเส้นคั่น */
-            .divider { display: none; }
-
-            /* 4. Podium Spacing */
-            .podium-wrapper { 
-                height: 380px; 
+            /* Grid 2 แถว: แถว 1 เต็ม / แถว 2 แบ่ง 3 ช่อง */
+            .controls-area { 
+                width: 100%; 
+                display: grid; 
+                grid-template-columns: 1fr 1fr 1fr; /* 3 Columns */
                 gap: 8px; 
-                margin-top: 30px; 
+                background: transparent; border: none; padding: 0; overflow: visible; 
             }
+            #amphoeGroup { display: contents; }
             
+            /* บรรทัด 1: ปุ่ม "ทั้งหมด" */
+            #amphoeGroup button:first-child { 
+                grid-column: 1 / -1; width: 100%; background: white; color: var(--primary-color); 
+                font-size: 1.1rem; font-weight: 800; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+                padding: 8px; margin-bottom: 5px; border: 2px solid white; 
+            }
+            #amphoeGroup button:first-child.active { border-color: #f1c40f; color: #d35400; }
+            
+            /* บรรทัด 2: ปุ่มอำเภอ 3 ปุ่ม */
+            #amphoeGroup button:not(:first-child) { 
+                background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); 
+                border-radius: 8px; color: white; font-size: 0.8rem; 
+                display: flex; align-items: center; justify-content: center; height: 35px; 
+                transition: all 0.2s; 
+            }
+            #amphoeGroup button:not(:first-child).active { 
+                background: white !important; color: var(--primary-color) !important; font-weight: 800; border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+            }
+
+            .podium-wrapper { height: 380px; gap: 8px; margin-top: 30px; }
             .podium-card { padding: 15px 5px; }
             .podium-img { width: 60px; height: 60px; margin-top: 10px; }
             .rank-1 .podium-img { width: 80px; height: 80px; }
@@ -347,10 +190,9 @@
             .rank-2 .podium-score { font-size: 2rem; }
             .rank-3 .podium-score { font-size: 1.8rem; }
             .podium-name { font-size: 0.9rem; }
-            .podium-party { font-size: 0.75rem; }
-            
             .fixed-footer { padding-bottom: 25px; }
             .stat-number { font-size: 1rem; }
+            .unit-card-large .uc-name { width: 100px; }
         }
     </style>
 </head>
@@ -358,9 +200,7 @@
 
     <div class="top-header">
         <div class="brand-section">
-            <div class="brand-icon">
-                <i class="fas fa-vote-yea"></i>
-            </div>
+            <div class="brand-icon"><i class="fas fa-vote-yea"></i></div>
             <div class="brand-text-wrapper">
                 <span class="brand-line-1">รายงานผลคะแนนเลือกตั้ง ส.ส. 2569</span>
                 <span class="brand-line-2">เขต 4 นราธิวาส (อย่างไม่เป็นทางการ)</span>
@@ -369,34 +209,45 @@
         
         <div class="controls-area">
             <div id="amphoeGroup"></div>
-            <div class="divider bg-white opacity-25" style="width:1px; height:20px;"></div>
-            <div style="position:relative;">
-                <select id="selectTambon" class="custom-select" onchange="filterData()" disabled>
-                    <option value="all">🚩 ทุกตำบล</option>
-                </select>
-            </div>
         </div>
     </div>
 
     <div class="main-content">
-        
         <div id="podiumSection">
             <div class="text-center text-muted py-5"><i class="fas fa-spinner fa-spin fa-2x"></i><br>กำลังโหลดข้อมูล...</div>
         </div>
 
         <div class="divider-header">
-            <span class="line"></span>
-            <span class="text">อันดับอื่น ๆ</span>
-            <span class="line"></span>
+            <span class="line"></span><span class="text">อันดับอื่น ๆ</span><span class="line"></span>
         </div>
         <div id="restListSection" class="list-container"></div>
 
         <div class="divider-header mt-5">
-            <span class="line"></span>
-            <span class="text"><i class="fas fa-chart-line me-2"></i>หน่วยที่มีผู้ใช้สิทธิ์สูงสุด</span>
-            <span class="line"></span>
+            <span class="line"></span><span class="text"><i class="fas fa-chart-line me-2"></i>หน่วยที่มีผู้มาใช้สิทธิ์สูงสุด</span><span class="line"></span>
         </div>
         <div id="topUnitsSection" class="top-units-container"></div>
+
+        <div class="divider-header mt-5">
+            <span class="line"></span><span class="text"><i class="fas fa-search me-2"></i>ค้นหาคะแนนรายหน่วย</span><span class="line"></span>
+        </div>
+        <div class="search-container">
+            <div class="search-controls-grid">
+                <select id="s_amphoe" class="search-select" onchange="updateSearchTambon()">
+                    <option value="" disabled selected>-- เลือกอำเภอ --</option>
+                </select>
+                <select id="s_tambon" class="search-select" onchange="updateSearchUnits()" disabled>
+                    <option value="" disabled selected>-- เลือกตำบล --</option>
+                </select>
+                <select id="s_unit" class="search-select" onchange="renderSearchedUnit()" disabled>
+                    <option value="" disabled selected>-- เลือกหน่วย --</option>
+                </select>
+            </div>
+            
+            <div id="searchResultContainer" class="search-result-area">
+                <div class="text-muted small"><i class="fas fa-arrow-up me-1"></i>กรุณาเลือกข้อมูลให้ครบถ้วน</div>
+            </div>
+        </div>
+
     </div>
 
     <div class="fixed-footer">
@@ -445,6 +296,7 @@
                 const response = await fetch(scriptURL);
                 globalData = await response.json();
                 initFilterButtons(globalData.units);
+                initSearchSection();
                 filterData();
             } catch (error) { console.error("Error:", error); }
         }
@@ -470,30 +322,14 @@
             currentAmphoe = amphoe;
             document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
             btnElement.classList.add('active');
-            const selectTambon = document.getElementById('selectTambon');
-            selectTambon.innerHTML = '<option value="all">🚩 ทุกตำบล</option>';
-            selectTambon.value = 'all';
-            if (currentAmphoe === 'all') selectTambon.disabled = true;
-            else {
-                selectTambon.disabled = false;
-                const tambonSet = new Set();
-                globalData.units.forEach(u => { if (u[5] === currentAmphoe && u[6]) tambonSet.add(u[6]); });
-                tambonSet.forEach(tam => {
-                    let opt = document.createElement('option'); opt.value = tam; opt.text = tam;
-                    selectTambon.appendChild(opt);
-                });
-            }
             filterData();
         }
 
         function filterData() {
             if (!globalData) return;
-            const selectedAmphoe = currentAmphoe;
-            const selectedTambon = document.getElementById('selectTambon').value;
             let filteredUnits = globalData.units.filter(u => {
-                let matchAmphoe = (selectedAmphoe === 'all') || (u[5] === selectedAmphoe);
-                let matchTambon = (selectedTambon === 'all') || (u[6] === selectedTambon);
-                return matchAmphoe && matchTambon;
+                let matchAmphoe = (currentAmphoe === 'all') || (u[5] === currentAmphoe);
+                return matchAmphoe;
             });
             calculateAndRender(filteredUnits, globalData.scores);
         }
@@ -566,7 +402,6 @@
 
             let ranked = globalScores.map((score, index) => ({ score, ...candidatesConfig[index] })).sort((a, b) => b.score - a.score);
 
-            // --- Updated Podium HTML (Vertical Cards) ---
             const podiumDiv = document.getElementById('podiumSection');
             if(ranked.length >= 3) {
                 podiumDiv.innerHTML = `
@@ -647,10 +482,158 @@
                 container.innerHTML += html;
             }
         }
+
+        // --- Search Logic ---
+        function initSearchSection() {
+            const amphoeSet = new Set();
+            globalData.units.forEach(u => { if(u[5]) amphoeSet.add(u[5]); });
+            
+            const sAmphoe = document.getElementById('s_amphoe');
+            sAmphoe.innerHTML = '<option value="" disabled selected>-- เลือกอำเภอ --</option>';
+            amphoeSet.forEach(amp => {
+                let opt = document.createElement('option'); opt.value = amp; opt.text = amp;
+                sAmphoe.appendChild(opt);
+            });
+        }
+
+        function updateSearchTambon() {
+            const sAmphoeVal = document.getElementById('s_amphoe').value;
+            const sTambon = document.getElementById('s_tambon');
+            const sUnit = document.getElementById('s_unit');
+            
+            sTambon.innerHTML = '<option value="" disabled selected>-- เลือกตำบล --</option>';
+            sTambon.disabled = false;
+            
+            sUnit.innerHTML = '<option value="" disabled selected>-- เลือกหน่วย --</option>';
+            sUnit.disabled = true;
+            document.getElementById('searchResultContainer').innerHTML = '<div class="text-muted small">กรุณาเลือกข้อมูลให้ครบ</div>';
+
+            const tambonSet = new Set();
+            globalData.units.forEach(u => {
+                if(u[5] === sAmphoeVal && u[6]) tambonSet.add(u[6]);
+            });
+
+            tambonSet.forEach(tam => {
+                let opt = document.createElement('option'); opt.value = tam; opt.text = tam;
+                sTambon.appendChild(opt);
+            });
+        }
+
+        function updateSearchUnits() {
+            const sAmphoeVal = document.getElementById('s_amphoe').value;
+            const sTambonVal = document.getElementById('s_tambon').value;
+            const sUnit = document.getElementById('s_unit');
+
+            sUnit.innerHTML = '<option value="" disabled selected>-- เลือกหน่วย --</option>';
+            sUnit.disabled = false;
+
+            let optOverview = document.createElement('option');
+            optOverview.value = "overview";
+            optOverview.text = "📊 ภาพรวมทั้งตำบล";
+            sUnit.appendChild(optOverview);
+
+            let unitList = globalData.units.filter(u => 
+                u[5] === sAmphoeVal && 
+                u[6] === sTambonVal &&
+                u[0].trim().startsWith("หน่วยที่")
+            );
+            
+            unitList.forEach(u => {
+                let opt = document.createElement('option'); opt.value = u[0]; opt.text = u[0];
+                sUnit.appendChild(opt);
+            });
+
+            sUnit.value = "overview";
+            renderSearchedUnit();
+        }
+
+        function renderSearchedUnit() {
+            const unitName = document.getElementById('s_unit').value;
+            const sAmphoeVal = document.getElementById('s_amphoe').value;
+            const sTambonVal = document.getElementById('s_tambon').value;
+            const resultDiv = document.getElementById('searchResultContainer');
+            
+            if (unitName === 'overview') {
+                let aggScores = [0,0,0,0,0,0,0,0];
+                let aggVoted = 0;
+                let aggEligible = 0;
+
+                const tambonUnits = globalData.units.filter(u => u[5] === sAmphoeVal && u[6] === sTambonVal);
+                
+                tambonUnits.forEach(u => {
+                    aggEligible += (parseInt(u[4]) || 0);
+                    let uData = getUnitScores(u[0]);
+                    aggVoted += uData.voted;
+                    for(let i=0; i<8; i++) aggScores[i] += uData.scores[i];
+                });
+
+                let uRanked = aggScores.map((score, idx) => ({ score, ...candidatesConfig[idx] })).sort((a, b) => b.score - a.score);
+                let maxScore = uRanked[0].score > 0 ? uRanked[0].score : 1;
+
+                let html = `
+                    <div class="unit-card-large" style="border-top: 5px solid var(--secondary-color);">
+                        <div class="unit-header">
+                            <div class="unit-info-col">
+                                <div class="unit-name-scroll" style="font-size:1.1rem;">ภาพรวม${sTambonVal}</div>
+                                <div class="unit-location"><i class="fas fa-map text-secondary me-1"></i>อำเภอ${sAmphoeVal} (${tambonUnits.length} หน่วย)</div>
+                            </div>
+                            <div class="unit-voted"><i class="fas fa-users me-1 text-primary"></i>${aggVoted.toLocaleString()} / ${aggEligible.toLocaleString()}</div>
+                        </div>
+                        <div class="unit-body">
+                `;
+                for(let k=0; k<8; k++) {
+                    let c = uRanked[k];
+                    let barWidth = (c.score / maxScore) * 100;
+                    html += `
+                        <div class="unit-candidate-row" style="font-size:0.95rem;">
+                            <div class="uc-rank" style="width:25px;">#${k+1}</div>
+                            <div class="uc-name" style="width:140px;" title="${c.name}">${c.name}</div>
+                            <div class="uc-bar-container"><div class="uc-bar" style="width:${barWidth}%; background-color:${colorMap[c.no]}"></div></div>
+                            <div class="uc-score" style="width:50px;">${c.score.toLocaleString()}</div>
+                        </div>
+                    `;
+                }
+                html += `</div></div>`;
+                resultDiv.innerHTML = html;
+                return;
+            }
+
+            const unitInfo = globalData.units.find(u => u[0] === unitName);
+            if(!unitInfo) return;
+
+            const unitData = getUnitScores(unitName);
+            const unitVoters = parseInt(unitInfo[4]) || 0;
+            
+            let uRanked = unitData.scores.map((score, idx) => ({ score, ...candidatesConfig[idx] })).sort((a, b) => b.score - a.score);
+            let maxScore = uRanked[0].score > 0 ? uRanked[0].score : 1;
+
+            let html = `
+                <div class="unit-card-large">
+                    <div class="unit-header">
+                        <div class="unit-info-col">
+                            <div class="unit-name-scroll">${unitInfo[0]}</div>
+                            <div class="unit-location"><i class="fas fa-map-marker-alt me-1 text-danger"></i>${unitInfo[6]} อ.${unitInfo[5]}</div>
+                        </div>
+                        <div class="unit-voted"><i class="fas fa-users me-1 text-primary"></i>${unitData.voted.toLocaleString()} / ${unitVoters.toLocaleString()}</div>
+                    </div>
+                    <div class="unit-body">
+            `;
+
+            for(let k=0; k<8; k++) {
+                let c = uRanked[k];
+                let barWidth = (c.score / maxScore) * 100;
+                html += `
+                    <div class="unit-candidate-row" style="font-size:0.95rem;">
+                        <div class="uc-rank" style="width:25px;">#${k+1}</div>
+                        <div class="uc-name" style="width:140px;" title="${c.name}">${c.name}</div>
+                        <div class="uc-bar-container"><div class="uc-bar" style="width:${barWidth}%; background-color:${colorMap[c.no]}"></div></div>
+                        <div class="uc-score" style="width:50px;">${c.score.toLocaleString()}</div>
+                    </div>
+                `;
+            }
+            html += `</div></div>`;
+            resultDiv.innerHTML = html;
+        }
     </script>
 </body>
 </html>
-
-
-
-
