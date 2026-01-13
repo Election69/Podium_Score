@@ -627,7 +627,7 @@
                         <div class="unit-header">
                             <div class="unit-info-col">
                                 <div class="unit-name-scroll">${u.name}</div>
-                                <div class="unit-location"><i class="fas fa-map-marker-alt me-1 text-danger"></i>ต.${u.tambon} อ.${u.amphoe}</div>
+                                <div class="unit-location"><i class="fas fa-map-marker-alt me-1 text-danger"></i>${u.tambon} อ.${u.amphoe}</div>
                             </div>
                             <div class="unit-voted"><i class="fas fa-users me-1 text-primary"></i>${u.voted.toLocaleString()}</div>
                         </div>
@@ -638,7 +638,7 @@
                     html += `
                         <div class="unit-candidate-row">
                             <div class="uc-rank">#${k+1}</div>
-                            <div class="uc-name" title="${c.name}">${c.name}</div>
+                            <div class="uc-name" title="${c.name}">เบอร์ ${c.no}</div>
                             <div class="uc-bar-container"><div class="uc-bar" style="width:${barWidth}%; background-color:${colorMap[c.no]}"></div></div>
                             <div class="uc-score">${c.score.toLocaleString()}</div>
                         </div>`;
@@ -650,5 +650,6 @@
     </script>
 </body>
 </html>
+
 
 
