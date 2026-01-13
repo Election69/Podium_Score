@@ -24,70 +24,121 @@
             padding-bottom: 120px;
         }
 
-        /* --- Header --- */
+        /* --- Header Redesign --- */
         .top-header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white; padding: 12px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-            gap: 10px; flex-shrink: 0;
+            color: white; 
+            padding: 15px 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            gap: 20px; 
+            flex-shrink: 0;
+            position: relative; 
+            z-index: 100;
         }
-        .brand-text { font-weight: 800; font-size: 1.3rem; letter-spacing: 0.5px; }
+
+        .brand-section { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
+
+        .brand-icon {
+            font-size: 2.8rem;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .brand-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .brand-line-1 {
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .brand-line-2 {
+            font-weight: 400;
+            font-size: 1rem;
+            opacity: 0.9;
+            font-family: 'Sarabun', sans-serif;
+        }
         
-        .controls-area { display: flex; align-items: center; gap: 8px; overflow-x: auto; }
-        .btn-filter {
-            background: rgba(255,255,255,0.2); border: none; color: white;
-            padding: 5px 12px; border-radius: 20px; white-space: nowrap; font-size: 0.85rem; transition: 0.3s;
+        /* Filters Area */
+        .controls-area { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            background: rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        .btn-filter:hover, .btn-filter.active { background: white; color: var(--primary-color); font-weight: bold; }
+
+        .btn-filter {
+            background: transparent; border: none; color: rgba(255,255,255,0.8);
+            padding: 6px 15px; border-radius: 20px; white-space: nowrap; font-size: 0.9rem; font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-filter:hover, .btn-filter.active { background: white; color: var(--primary-color); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         
         .custom-select {
-            background: white; border: none; color: var(--primary-color);
-            padding: 5px 25px 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;
+            background: rgba(255,255,255,0.9); border: none; color: var(--primary-color);
+            padding: 6px 25px 6px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;
             cursor: pointer; outline: none; appearance: none;
         }
 
         /* --- Main Layout --- */
         .main-content {
-            flex-grow: 1; padding: 15px; width: 100%; max-width: 100%; margin: 0;
+            flex-grow: 1; 
+            padding: 20px 15px; 
+            width: 100%; 
+            max-width: 100%;
+            margin: 0;
         }
 
-        /* --- NEW PODIUM STYLE (Vertical Cards) --- */
+        /* --- Podium Colors --- */
+        .bg-no-1 { background: linear-gradient(180deg, #A1887F 0%, #5D4037 100%); border-color: #8D6E63; }
+        .bg-no-2 { background: linear-gradient(180deg, #4FC3F7 0%, #0288D1 100%); border-color: #29B6F6; }
+        .bg-no-3 { background: linear-gradient(180deg, #81C784 0%, #388E3C 100%); border-color: #66BB6A; }
+        .bg-no-4 { background: linear-gradient(180deg, #FFB74D 0%, #F57C00 100%); border-color: #FFA726; }
+        .bg-no-5 { background: linear-gradient(180deg, #64B5F6 0%, #1976D2 100%); border-color: #42A5F5; }
+        .bg-no-6 { background: linear-gradient(180deg, #E57373 0%, #D32F2F 100%); border-color: #EF5350; }
+        .bg-no-7 { background: linear-gradient(180deg, #90A4AE 0%, #455A64 100%); border-color: #78909C; }
+        .bg-no-8 { background: linear-gradient(180deg, #F06292 0%, #C2185B 100%); border-color: #EC407A; }
+
+        /* --- Podium Section --- */
         .podium-wrapper {
             display: flex; justify-content: center; align-items: flex-end;
-            /* เพิ่มความสูงรวมเพื่อให้การ์ดใบใหญ่สุดแสดงผลได้พอดี */
             height: 450px; 
-            margin-bottom: 40px; padding-top: 20px;
-            gap: 15px; /* ระยะห่างระหว่างการ์ด */
+            margin-bottom: 40px; 
+            padding-top: 10px; /* ระยะห่างปกติ */
+            gap: 15px;
         }
         
         .podium-card {
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             text-align: center; position: relative; transition: all 0.5s ease;
-            background: white;
-            border-radius: 16px; /* มุมโค้งมน */
-            padding: 20px 10px;
-            /* เงาให้ดูลอยขึ้นมา */
+            background: white; border-radius: 16px; padding: 20px 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
-            border-top: 6px solid #ddd; /* แถบสีด้านบน (จะถูกเปลี่ยนด้วย JS) */
+            border-top: 6px solid #ddd;
         }
         
-        /* ลำดับการจัดวาง */
-        .podium-card.rank-1 { order: 2; width: 36%; z-index: 10; }
-        .podium-card.rank-2 { order: 1; width: 30%; z-index: 5; }
-        .podium-card.rank-3 { order: 3; width: 30%; z-index: 5; }
-
-        /* ความสูงต่างระดับ (Stepped Heights) */
-        .podium-card.rank-1 { height: 400px; } /* สูงสุด */
-        .podium-card.rank-2 { height: 340px; } /* ปานกลาง */
-        .podium-card.rank-3 { height: 300px; } /* ต่ำสุด */
+        .podium-card.rank-1 { order: 2; width: 36%; z-index: 10; height: 400px; }
+        .podium-card.rank-2 { order: 1; width: 30%; z-index: 5; height: 340px; }
+        .podium-card.rank-3 { order: 3; width: 30%; z-index: 5; height: 300px; }
 
         .podium-img {
             width: 90px; height: 90px; object-fit: cover; border-radius: 50%;
-            border: 3px solid white; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-            margin-bottom: 15px; background: white; 
-            margin-top: 15px; /* ระยะห่างจากด้านบน */
+            border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            margin-bottom: 15px; background: white; margin-top: 15px;
         }
         .rank-1 .podium-img { width: 110px; height: 110px; } 
 
@@ -98,11 +149,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: 2px solid white;
         }
 
-        /* คะแนน - ปรับให้ใช้สีตามเบอร์แทนสีขาว */
-        .podium-score {
-            font-weight: 900; line-height: 1; margin-bottom: 10px; letter-spacing: -2px;
-            /* ลบ text-shadow สีดำออก เพราะพื้นหลังขาว */
-        }
+        .podium-score { font-weight: 900; line-height: 1; margin-bottom: 10px; letter-spacing: -2px; }
         .rank-1 .podium-score { font-size: 3.5rem; }
         .rank-2 .podium-score { font-size: 2.5rem; }
         .rank-3 .podium-score { font-size: 2.2rem; }
@@ -119,9 +166,7 @@
         .divider-header .line { height: 2px; background: #dce1e6; flex-grow: 1; margin: 0 15px; max-width: 100px; }
 
         /* --- List Cards --- */
-        .list-container {
-            display: grid; grid-template-columns: 100%; gap: 10px; padding: 0 5px;
-        }
+        .list-container { display: grid; grid-template-columns: 100%; gap: 10px; padding: 0 5px; }
         .rank-card {
             background: white; border-radius: 10px; padding: 12px 15px;
             display: flex; align-items: center;
@@ -136,7 +181,7 @@
         .rc-party { font-size: 0.85rem; color: #777; }
         .rc-score { font-size: 1.4rem; font-weight: 800; }
 
-        /* --- Top Units Section (Updated Grid) --- */
+        /* --- Top Units Section --- */
         .top-units-container {
             display: flex; gap: 15px; padding: 5px 5px 15px 5px; overflow-x: auto; scrollbar-width: thin;
         }
@@ -192,6 +237,7 @@
         .stat-progress-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
         .stat-desc { font-size: 0.8rem; font-weight: 700; margin-top: 2px; }
 
+        /* --- 🖥️ Desktop --- */
         @media (min-width: 769px) {
             .fixed-footer { padding: 12px 20px; }
             .stat-footer-grid { display: flex; justify-content: center; gap: 40px; }
@@ -202,16 +248,53 @@
             .stat-desc { margin-top: 0; margin-left: 5px; font-size: 0.9rem; }
         }
 
+        /* --- 📱 Mobile (Responsive Header & Spacing) --- */
         @media (max-width: 576px) {
-            .podium-wrapper { height: 380px; gap: 10px; }
+            
+            /* Header Mobile Layout */
+            .top-header {
+                flex-direction: column; /* เรียงแนวตั้ง */
+                align-items: stretch; /* ขยายเต็มความกว้าง */
+                padding: 20px 15px;
+                gap: 15px;
+            }
+
+            .brand-section {
+                flex-direction: column; /* ไอคอนอยู่บน ตัวหนังสืออยู่ล่าง */
+                text-align: center;
+                gap: 5px;
+            }
+
+            .brand-icon {
+                font-size: 2.2rem; /* ลดขนาดไอคอนนิดหน่อย */
+                margin-bottom: 5px;
+            }
+
+            .brand-line-1 { font-size: 1.3rem; } /* ปรับขนาดบรรทัด 1 */
+            .brand-line-2 { font-size: 0.9rem; font-weight: 300; opacity: 0.85; } /* ปรับขนาดบรรทัด 2 */
+
+            .controls-area {
+                justify-content: center; /* กึ่งกลาง */
+                background: rgba(0,0,0,0.1); /* พื้นหลังเข้มขึ้นนิดนึงให้อ่านง่าย */
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            /* Main Content Spacing */
+            .podium-wrapper { 
+                height: 380px; 
+                gap: 8px; 
+                margin-top: 25px; /* 🔥 เพิ่มช่องว่างด้านบน ไม่ให้ซ้อน Header */
+            }
+            
             .podium-card { padding: 15px 5px; }
             .podium-img { width: 60px; height: 60px; margin-top: 10px; }
             .rank-1 .podium-img { width: 80px; height: 80px; }
             .rank-1 .podium-score { font-size: 2.5rem; }
             .rank-2 .podium-score { font-size: 2rem; }
             .rank-3 .podium-score { font-size: 1.8rem; }
-            .podium-name { font-size: 0.9rem; }
-            .podium-party { font-size: 0.8rem; }
+            .podium-name { font-size: 0.85rem; }
+            .podium-party { font-size: 0.75rem; }
             
             .fixed-footer { padding-bottom: 25px; }
             .stat-number { font-size: 1rem; }
@@ -222,10 +305,15 @@
 
     <div class="top-header">
         <div class="brand-section">
-            <i class="fas fa-poll me-2"></i>
-            <span class="line-1">รายงานผลคะแนนเลือกตั้ง ส.ส. 2569</span>
-            <span class="line-2">เขต 4 นราธิวาส (อย่างไม่เป็นทางการ)</span>
+            <div class="brand-icon">
+                <i class="fas fa-vote-yea"></i>
+            </div>
+            <div class="brand-text-wrapper">
+                <span class="brand-line-1">รายงานผลคะแนนเลือกตั้ง ส.ส. 2569</span>
+                <span class="brand-line-2">เขต 4 นราธิวาส (อย่างไม่เป็นทางการ)</span>
+            </div>
         </div>
+        
         <div class="controls-area">
             <div id="amphoeGroup" style="display:flex; gap:5px;"></div>
             <div class="divider bg-white opacity-25" style="width:1px; height:20px;"></div>
@@ -288,6 +376,7 @@
             { no: 7, party: "พรรคพลังประชารัฐ", name: "นายไซดี เจ๊ะหามะ", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/7e761e0a5c9a1d1be.png"},
             { no: 8, party: "พรรคประชากรไทย", name: "นางสาวซาลีฮะห์ เจ๊ะหามะ", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/8f7b21c2713bbba6a.png"}    
         ];
+
 
         const colorMap = {
             1: '#8D6E63', 2: '#29B6F6', 3: '#66BB6A', 4: '#FFA726',
@@ -425,7 +514,7 @@
 
             let ranked = globalScores.map((score, index) => ({ score, ...candidatesConfig[index] })).sort((a, b) => b.score - a.score);
 
-            // --- Updated Podium HTML ---
+            // --- Updated Podium HTML (Vertical Cards) ---
             const podiumDiv = document.getElementById('podiumSection');
             if(ranked.length >= 3) {
                 podiumDiv.innerHTML = `
