@@ -227,6 +227,7 @@
         .stat-progress-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
         .stat-desc { font-size: 0.8rem; font-weight: 700; margin-top: 2px; }
 
+        /* --- 🖥️ Desktop --- */
         @media (min-width: 769px) {
             .fixed-footer { padding: 12px 20px; }
             .stat-footer-grid { display: flex; justify-content: center; gap: 40px; }
@@ -253,60 +254,75 @@
                 gap: 0;
             }
 
-            /* 2. Hide Icon on Mobile */
+            /* 2. ซ่อนไอคอนเมื่อเปิดในมือถือ */
             .brand-icon { display: none !important; }
 
             .brand-line-1 { font-size: 1.35rem; margin-bottom: 2px; }
             .brand-line-2 { font-size: 0.9rem; font-weight: 300; opacity: 0.85; }
 
-            /* 3. Mobile Filters (2 Lines Grid Layout) */
+            /* 3. Mobile Filters (New 2-Row Design) */
             .controls-area {
                 width: 100%;
-                display: grid; /* ใช้ Grid เพื่อจัด Layout */
-                grid-template-columns: 1fr 1fr 1fr 1.3fr; /* แบ่ง 4 คอลัมน์ (Dropdown กว้างหน่อย) */
+                display: grid; /* ใช้ Grid แบ่งโซน */
+                grid-template-columns: 1fr 1fr 1fr 1.3fr; /* 4 ช่องสำหรับแถวที่ 2 */
                 gap: 8px;
                 background: transparent;
-                padding: 0;
-                overflow: visible;
                 border: none;
+                padding: 0;
+                overflow: visible; /* ไม่ต้อง Scroll แล้ว */
             }
 
-            /* ทำให้ปุ่มใน #amphoeGroup เป็นส่วนหนึ่งของ Grid */
-            #amphoeGroup { display: contents; }
+            #amphoeGroup { display: contents; /* ให้ลูกๆ ไปอยู่ใน Grid แม่ */ }
 
-            /* บรรทัดที่ 1: ปุ่ม "ทั้งหมด" เต็มความกว้าง */
+            /* 🌟 บรรทัดที่ 1: ปุ่ม "ทั้งหมด" */
             #amphoeGroup button:first-child {
-                grid-column: 1 / -1; /* Span ทั้ง 4 คอลัมน์ */
-                width: 100%;
-                background: var(--primary-color);
-                border: 1px solid rgba(255,255,255,0.3);
+                grid-column: 1 / -1; /* ขยายเต็มแถว (Full Width) */
+                background: white;
+                color: var(--primary-color);
+                font-size: 1.1rem;
                 font-weight: 800;
+                border-radius: 12px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                padding: 8px;
+                margin-bottom: 5px;
+                border: 2px solid white;
+            }
+            #amphoeGroup button:first-child.active {
+                border-color: #f1c40f; /* สีทองเมื่อเลือกอยู่ */
+                color: #d35400;
             }
 
-            /* บรรทัดที่ 2: ปุ่มอำเภอ 3 ปุ่ม + Dropdown */
-            #amphoeGroup button:not(:first-child) {
-                grid-column: span 1; /* กินพื้นที่คนละ 1 ช่อง */
-                padding: 6px 2px;
-                font-size: 0.75rem;
-                text-align: center;
-            }
-
+            /* 🌟 บรรทัดที่ 2: กรอบใสรวมปุ่มอำเภอ + Dropdown */
+            /* ใส่กรอบจำลองโดยการใส่พื้นหลังให้ปุ่มแต่ละตัวดูเป็นชุดเดียวกัน */
+            
+            #amphoeGroup button:not(:first-child), 
             .controls-area > div:last-child {
-                grid-column: span 1; /* Dropdown กินพื้นที่ช่องสุดท้าย */
-                min-width: 0;
+                background: rgba(255, 255, 255, 0.15); /* พื้นหลังโปร่งใส */
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 8px;
+                color: white;
+                font-size: 0.8rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 35px; /* ความสูงเท่ากัน */
             }
 
-            .divider { display: none; } /* ซ่อนเส้นคั่น */
-
+            /* Dropdown ในบรรทัด 2 */
             .custom-select {
-                padding: 6px 5px; 
-                font-size: 0.75rem; 
-                width: 100%;
-                background-position: right 2px center;
+                background: transparent;
+                color: white;
+                border: none;
+                padding: 0 5px;
+                font-size: 0.8rem;
                 text-align: center;
+                width: 100%;
+                height: 100%;
             }
+            /* ซ่อนเส้นคั่น */
+            .divider { display: none; }
 
-            /* Main Content Spacing */
+            /* 4. Podium Spacing */
             .podium-wrapper { 
                 height: 380px; 
                 gap: 8px; 
@@ -352,6 +368,7 @@
     </div>
 
     <div class="main-content">
+        
         <div id="podiumSection">
             <div class="text-center text-muted py-5"><i class="fas fa-spinner fa-spin fa-2x"></i><br>กำลังโหลดข้อมูล...</div>
         </div>
@@ -401,6 +418,7 @@
             { no: 7, party: "พรรคพลังประชารัฐ", name: "นายไซดี เจ๊ะหามะ", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/7e761e0a5c9a1d1be.png"},
             { no: 8, party: "พรรคประชากรไทย", name: "นางสาวซาลีฮะห์ เจ๊ะหามะ", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/8f7b21c2713bbba6a.png"}    
         ];
+
         const colorMap = {
             1: '#8D6E63', 2: '#29B6F6', 3: '#66BB6A', 4: '#FFA726',
             5: '#42A5F5', 6: '#EF5350', 7: '#78909C', 8: '#EC407A'
