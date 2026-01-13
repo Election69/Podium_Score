@@ -638,7 +638,7 @@
                     html += `
                         <div class="unit-candidate-row">
                             <div class="uc-rank">#${k+1}</div>
-                            <div class="uc-name" title="${c.name}">เบอร์ ${c.no}</div>
+                            <div class="uc-name" title="${c.name}">${c.name}</div>
                             <div class="uc-bar-container"><div class="uc-bar" style="width:${barWidth}%; background-color:${colorMap[c.no]}"></div></div>
                             <div class="uc-score">${c.score.toLocaleString()}</div>
                         </div>`;
@@ -650,6 +650,7 @@
     </script>
 </body>
 </html>
+
 
 
 
