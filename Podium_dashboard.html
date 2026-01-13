@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dashboard รายงานผลคะแนนเลือกตั้ง 2569 เขต 4 นราธิวาส</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #004e92;
+            --secondary-color: #009245;
+            --bg-color: #f4f6f9;
+        }
+
+        body { 
+            font-family: 'Sarabun', sans-serif; 
+            background-color: var(--bg-color);
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; min-height: 100vh;
+            padding-bottom: 120px;
+        }
+
+        /* --- Header --- */
+        .top-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white; padding: 12px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 10px; flex-shrink: 0;
+        }
+        .brand-text { font-weight: 800; font-size: 1.3rem; letter-spacing: 0.5px; }
+        
+        .controls-area { display: flex; align-items: center; gap: 8px; overflow-x: auto; }
+        .btn-filter {
+            background: rgba(255,255,255,0.2); border: none; color: white;
+            padding: 5px 12px; border-radius: 20px; white-space: nowrap; font-size: 0.85rem; transition: 0.3s;
+        }
+        .btn-filter:hover, .btn-filter.active { background: white; color: var(--primary-color); font-weight: bold; }
+        
+        .custom-select {
+            background: white; border: none; color: var(--primary-color);
+            padding: 5px 25px 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;
+            cursor: pointer; outline: none; appearance: none;
+        }
+
+        /* --- Main Layout --- */
+        .main-content {
+            flex-grow: 1; padding: 15px; width: 100%; max-width: 100%; margin: 0;
+        }
+
+        /* --- NEW PODIUM STYLE (Vertical Cards) --- */
+        .podium-wrapper {
+            display: flex; justify-content: center; align-items: flex-end;
+            /* เพิ่มความสูงรวมเพื่อให้การ์ดใบใหญ่สุดแสดงผลได้พอดี */
+            height: 450px; 
+            margin-bottom: 40px; padding-top: 20px;
+            gap: 15px; /* ระยะห่างระหว่างการ์ด */
+        }
+        
+        .podium-card {
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            text-align: center; position: relative; transition: all 0.5s ease;
+            background: white;
+            border-radius: 16px; /* มุมโค้งมน */
+            padding: 20px 10px;
+            /* เงาให้ดูลอยขึ้นมา */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
+            border-top: 6px solid #ddd; /* แถบสีด้านบน (จะถูกเปลี่ยนด้วย JS) */
+        }
+        
+        /* ลำดับการจัดวาง */
+        .podium-card.rank-1 { order: 2; width: 36%; z-index: 10; }
+        .podium-card.rank-2 { order: 1; width: 30%; z-index: 5; }
+        .podium-card.rank-3 { order: 3; width: 30%; z-index: 5; }
+
+        /* ความสูงต่างระดับ (Stepped Heights) */
+        .podium-card.rank-1 { height: 400px; } /* สูงสุด */
+        .podium-card.rank-2 { height: 340px; } /* ปานกลาง */
+        .podium-card.rank-3 { height: 300px; } /* ต่ำสุด */
+
+        .podium-img {
+            width: 90px; height: 90px; object-fit: cover; border-radius: 50%;
+            border: 3px solid white; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            margin-bottom: 15px; background: white; 
+            margin-top: 15px; /* ระยะห่างจากด้านบน */
+        }
+        .rank-1 .podium-img { width: 110px; height: 110px; } 
+
+        .rank-number {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: white; color: #333; width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: 2px solid white;
+        }
+
+        /* คะแนน - ปรับให้ใช้สีตามเบอร์แทนสีขาว */
+        .podium-score {
+            font-weight: 900; line-height: 1; margin-bottom: 10px; letter-spacing: -2px;
+            /* ลบ text-shadow สีดำออก เพราะพื้นหลังขาว */
+        }
+        .rank-1 .podium-score { font-size: 3.5rem; }
+        .rank-2 .podium-score { font-size: 2.5rem; }
+        .rank-3 .podium-score { font-size: 2.2rem; }
+
+        .podium-name { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 4px; line-height: 1.2; }
+        .podium-party { font-size: 0.9rem; color: #777; font-weight: 500; }
+
+        /* --- Divider --- */
+        .divider-header {
+            display: flex; align-items: center; justify-content: center;
+            margin: 30px 0 20px 0;
+            color: var(--primary-color); font-weight: 800; font-size: 1.1rem;
+        }
+        .divider-header .line { height: 2px; background: #dce1e6; flex-grow: 1; margin: 0 15px; max-width: 100px; }
+
+        /* --- List Cards --- */
+        .list-container {
+            display: grid; grid-template-columns: 100%; gap: 10px; padding: 0 5px;
+        }
+        .rank-card {
+            background: white; border-radius: 10px; padding: 12px 15px;
+            display: flex; align-items: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s; border-left: 6px solid #ddd;
+            width: 100%;
+        }
+        .rc-rank { font-size: 1.1rem; font-weight: 800; color: #bbb; width: 30px; text-align: center; margin-right: 15px; }
+        .rc-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 20px; border: 2px solid #f8f9fa; }
+        .rc-info { flex-grow: 1; overflow: hidden; }
+        .rc-name { font-weight: 700; font-size: 1.1rem; color: #333; }
+        .rc-party { font-size: 0.85rem; color: #777; }
+        .rc-score { font-size: 1.4rem; font-weight: 800; }
+
+        /* --- Top Units Section (Updated Grid) --- */
+        .top-units-container {
+            display: flex; gap: 15px; padding: 5px 5px 15px 5px; overflow-x: auto; scrollbar-width: thin;
+        }
+        .top-units-container::-webkit-scrollbar { height: 6px; }
+        .top-units-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+        .unit-card {
+            background: white; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06); border: 1px solid #eee;
+            min-width: 280px; flex: 0 0 auto;
+        }
+        @media (min-width: 1200px) {
+            .top-units-container { display: grid; grid-template-columns: repeat(5, 1fr); overflow-x: visible; padding-bottom: 5px; }
+            .unit-card { min-width: 0; flex: auto; width: 100%; }
+        }
+        .unit-header {
+            background: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #eee;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .unit-info-col { flex-grow: 1; overflow: hidden; padding-right: 10px; }
+        .unit-name-scroll { 
+            font-weight: 800; color: var(--primary-color); font-size: 0.9rem;
+            white-space: nowrap; overflow-x: auto; scrollbar-width: none;
+        }
+        .unit-name-scroll::-webkit-scrollbar { display: none; }
+        .unit-location { font-size: 0.75rem; color: #666; font-weight: 600; margin-top: 2px; }
+        .unit-voted { font-size: 0.9rem; color: #333; font-weight: 700; white-space: nowrap; }
+        .unit-body { padding: 12px; }
+        .unit-candidate-row { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.85rem; }
+        .uc-rank { width: 20px; text-align: center; color: #999; font-size: 0.75rem; font-weight: bold; }
+        .uc-bar-container { flex-grow: 1; margin: 0 8px; background: #f1f1f1; border-radius: 3px; height: 6px; overflow: hidden; }
+        .uc-bar { height: 100%; border-radius: 3px; width: 0%; transition: width 0.5s; opacity: 0.9; }
+        .uc-name { font-weight: 600; color: #333; width: 80px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .uc-score { font-weight: 700; color: #333; width: 40px; text-align: right; font-size: 0.8rem; }
+
+        /* --- Footer --- */
+        .fixed-footer {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.98); border-top: 1px solid #dcdcdc;
+            backdrop-filter: blur(12px); box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
+            z-index: 1000; padding: 10px 15px 15px 15px;
+        }
+        .stat-footer-grid {
+            max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+        }
+        .stat-box {
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            text-align: center; border-right: 1px solid #eee; padding: 0 5px;
+        }
+        .stat-box:last-child { border-right: none; }
+        .stat-title { font-size: 0.75rem; color: #777; font-weight: 700; text-transform: uppercase; margin-bottom: 2px; }
+        .stat-number { font-size: 1.2rem; font-weight: 800; color: #2c3e50; line-height: 1.1; }
+        .stat-progress-bg { width: 100%; height: 6px; background: #e9ecef; border-radius: 3px; margin-top: 4px; }
+        .stat-progress-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
+        .stat-desc { font-size: 0.8rem; font-weight: 700; margin-top: 2px; }
+
+        @media (min-width: 769px) {
+            .fixed-footer { padding: 12px 20px; }
+            .stat-footer-grid { display: flex; justify-content: center; gap: 40px; }
+            .stat-box { flex-direction: row; background: #f8f9fa; padding: 8px 25px; border-radius: 50px; border: 1px solid #eee; gap: 15px; }
+            .stat-title { margin-bottom: 0; margin-right: 5px; font-size: 0.85rem; }
+            .stat-number { font-size: 1.3rem; margin: 0 5px; }
+            .stat-progress-bg { width: 120px; margin: 0 10px; height: 8px; }
+            .stat-desc { margin-top: 0; margin-left: 5px; font-size: 0.9rem; }
+        }
+
+        @media (max-width: 576px) {
+            .podium-wrapper { height: 380px; gap: 10px; }
+            .podium-card { padding: 15px 5px; }
+            .podium-img { width: 60px; height: 60px; margin-top: 10px; }
+            .rank-1 .podium-img { width: 80px; height: 80px; }
+            .rank-1 .podium-score { font-size: 2.5rem; }
+            .rank-2 .podium-score { font-size: 2rem; }
+            .rank-3 .podium-score { font-size: 1.8rem; }
+            .podium-name { font-size: 0.9rem; }
+            .podium-party { font-size: 0.8rem; }
+            
+            .fixed-footer { padding-bottom: 25px; }
+            .stat-number { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="brand-section">
+            <i class="fas fa-poll me-2"></i>
+            <span class="line-1">รายงานผลคะแนนเลือกตั้ง ส.ส. 2569</span>
+            <span class="line-2">เขต 4 นราธิวาส (อย่างไม่เป็นทางการ)</span>
+        </div>
+        <div class="controls-area">
+            <div id="amphoeGroup" style="display:flex; gap:5px;"></div>
+            <div class="divider bg-white opacity-25" style="width:1px; height:20px;"></div>
+            <div style="position:relative;">
+                <select id="selectTambon" class="custom-select" onchange="filterData()" disabled>
+                    <option value="all">🚩 ทุกตำบล</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        
+        <div id="podiumSection">
+            <div class="text-center text-muted py-5"><i class="fas fa-spinner fa-spin fa-2x"></i><br>กำลังโหลดข้อมูล...</div>
+        </div>
+
+        <div class="divider-header">
+            <span class="line"></span>
+            <span class="text">อันดับอื่น ๆ</span>
+            <span class="line"></span>
+        </div>
+        <div id="restListSection" class="list-container"></div>
+
+        <div class="divider-header mt-5">
+            <span class="line"></span>
+            <span class="text"><i class="fas fa-chart-line me-2"></i>หน่วยที่มีผู้ใช้สิทธิ์สูงสุด</span>
+            <span class="line"></span>
+        </div>
+        <div id="topUnitsSection" class="top-units-container"></div>
+    </div>
+
+    <div class="fixed-footer">
+        <div class="stat-footer-grid">
+            <div class="stat-box">
+                <div class="stat-title"><i class="fas fa-users me-1 text-secondary"></i> ผู้ใช้สิทธิ์</div>
+                <div class="stat-number" id="totalTurnout">... / ...</div>
+                <div class="stat-progress-bg"><div class="stat-progress-fill bg-success" id="turnoutBar" style="width: 0%"></div></div>
+                <div class="stat-desc text-success" id="turnoutPercent">0%</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-title"><i class="fas fa-flag-checkered me-1 text-secondary"></i> ความคืบหน้า</div>
+                <div class="stat-number" id="countingDisplay">0%</div>
+                <div class="stat-progress-bg"><div class="stat-progress-fill bg-primary" id="countingBar" style="width: 0%"></div></div>
+                <div class="stat-desc text-primary">เสร็จสิ้น</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxjGKqtdINH8KQIH4exj3qyE2zdsNNDj9Mm5x7kWyFI-UgJ9a2zsbFKXpzffOtpm1ea_Q/exec';
+        
+        const candidatesConfig = [
+            { no: 1, party: "พรรคประชาชาติ", name: "นายกูเฮง ยาวอหะซัน", imgSidebar: "https://img2.pic.in.th/14746ae2e943b791f.png" },
+            { no: 2, party: "พรรคประชาธิปัตย์", name: "นายกอเซ็ง มะเซ็ง", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/2f20164de60a3b0c8.png" },
+            { no: 3, party: "พรรคกล้าธรรม", name: "นายอดิศร อาแวเต๊ะ", imgSidebar: "https://img2.pic.in.th/31703a588faa60731.jpg" },
+            { no: 4, party: "พรรคประชาชน", name: "นายอักบัร เซราลี", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/47d4ceea9d498867b.png" },
+            { no: 5, party: "พรรคภูมิใจไทย", name: "นายซาการียา สะอิ", imgSidebar: "https://img2.pic.in.th/51fe81d8bbda133aa.png" },
+            { no: 6, party: "พรรคเพื่อไทย", name: "นายมาร์วาน บินบีดี", imgSidebar: "https://img2.pic.in.th/69adc3cca999bb66d.png" },
+            { no: 7, party: "พรรคพลังประชารัฐ", name: "นายไซดี เจ๊ะหามะ", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/7e761e0a5c9a1d1be.png"},
+            { no: 8, party: "พรรคประชากรไทย", name: "นางสาวซาลีฮะห์ เจ๊ะหามะ", imgSidebar: "https://img5.pic.in.th/file/secure-sv1/8f7b21c2713bbba6a.png"}    
+        ];
+
+        const colorMap = {
+            1: '#8D6E63', 2: '#29B6F6', 3: '#66BB6A', 4: '#FFA726',
+            5: '#42A5F5', 6: '#EF5350', 7: '#78909C', 8: '#EC407A'
+        };
+
+        let globalData = null;
+        let currentAmphoe = 'all';
+
+        fetchData();
+
+        async function fetchData() {
+            try {
+                const response = await fetch(scriptURL);
+                globalData = await response.json();
+                initFilterButtons(globalData.units);
+                filterData();
+            } catch (error) { console.error("Error:", error); }
+        }
+
+        function initFilterButtons(units) {
+            const amphoeSet = new Set();
+            units.forEach(u => { if(u[5]) amphoeSet.add(u[5]); });
+            const btnContainer = document.getElementById('amphoeGroup');
+            btnContainer.innerHTML = ''; 
+            let allBtn = document.createElement('button');
+            allBtn.className = 'btn-filter active'; allBtn.innerText = 'ทั้งหมด';
+            allBtn.onclick = () => selectAmphoe('all', allBtn);
+            btnContainer.appendChild(allBtn);
+            amphoeSet.forEach(amp => {
+                let btn = document.createElement('button');
+                btn.className = 'btn-filter'; btn.innerText = amp;
+                btn.onclick = () => selectAmphoe(amp, btn);
+                btnContainer.appendChild(btn);
+            });
+        }
+
+        function selectAmphoe(amphoe, btnElement) {
+            currentAmphoe = amphoe;
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            const selectTambon = document.getElementById('selectTambon');
+            selectTambon.innerHTML = '<option value="all">🚩 ทุกตำบล</option>';
+            selectTambon.value = 'all';
+            if (currentAmphoe === 'all') selectTambon.disabled = true;
+            else {
+                selectTambon.disabled = false;
+                const tambonSet = new Set();
+                globalData.units.forEach(u => { if (u[5] === currentAmphoe && u[6]) tambonSet.add(u[6]); });
+                tambonSet.forEach(tam => {
+                    let opt = document.createElement('option'); opt.value = tam; opt.text = tam;
+                    selectTambon.appendChild(opt);
+                });
+            }
+            filterData();
+        }
+
+        function filterData() {
+            if (!globalData) return;
+            const selectedAmphoe = currentAmphoe;
+            const selectedTambon = document.getElementById('selectTambon').value;
+            let filteredUnits = globalData.units.filter(u => {
+                let matchAmphoe = (selectedAmphoe === 'all') || (u[5] === selectedAmphoe);
+                let matchTambon = (selectedTambon === 'all') || (u[6] === selectedTambon);
+                return matchAmphoe && matchTambon;
+            });
+            calculateAndRender(filteredUnits, globalData.scores);
+        }
+
+        function getUnitScores(unitName) {
+            let currentScores = [0,0,0,0,0,0,0,0];
+            let votedCount = 0;
+            const unitScoresLog = globalData.scores.filter(row => row[1] === unitName);
+            if (unitScoresLog.length > 0) {
+                let targetRow = unitScoresLog[unitScoresLog.length - 1];
+                if (targetRow[4] === 'Finish') {
+                    for (let i = unitScoresLog.length - 2; i >= 0; i--) {
+                        if (unitScoresLog[i][4] !== 'Finish') { targetRow = unitScoresLog[i]; break; }
+                    }
+                }
+                for(let i=0; i<8; i++) {
+                    let sc = parseInt(targetRow[5+i]); if (isNaN(sc)) sc = 0; 
+                    currentScores[i] = sc; votedCount += sc;
+                }
+            }
+            return { scores: currentScores, voted: votedCount };
+        }
+
+        function calculateAndRender(units, scores) {
+            let globalScores = [0,0,0,0,0,0,0,0];
+            let totalEligible = 0;
+            let totalVoted = 0;
+            let unitsData = []; 
+
+            units.forEach(unit => {
+                const unitName = unit[0];
+                const unitVoters = parseInt(unit[4]) || 0;
+                const unitAmphoe = unit[5] || '-';
+                const unitTambon = unit[6] || '-';
+
+                totalEligible += unitVoters;
+                const unitData = getUnitScores(unitName);
+                
+                for(let i=0; i<8; i++) globalScores[i] += unitData.scores[i];
+                totalVoted += unitData.voted;
+
+                if(unitData.voted > 0) {
+                    unitsData.push({
+                        name: unitName, voted: unitData.voted, eligible: unitVoters,
+                        scores: unitData.scores, amphoe: unitAmphoe, tambon: unitTambon
+                    });
+                }
+            });
+
+            let globalCompleted = 0;
+            let globalTotalUnits = globalData.units.length;
+            globalData.units.forEach(u => {
+                const logs = scores.filter(row => row[1] === u[0]);
+                if (logs.some(log => log[4] === 'Finish')) globalCompleted++;
+            });
+            let progressPercent = globalTotalUnits > 0 ? (globalCompleted / globalTotalUnits) * 100 : 0;
+
+            updateDashboardUI(globalScores, totalEligible, totalVoted, progressPercent);
+            renderTopUnits(unitsData); 
+        }
+
+        function updateDashboardUI(globalScores, totalEligible, totalVoted, progressPercent) {
+            document.getElementById('totalTurnout').innerText = `${totalVoted.toLocaleString()} / ${totalEligible.toLocaleString()}`;
+            let percent = totalEligible > 0 ? (totalVoted/totalEligible*100) : 0;
+            document.getElementById('turnoutBar').style.width = `${percent}%`;
+            document.getElementById('turnoutPercent').innerText = `${percent.toFixed(2)}%`;
+
+            document.getElementById('countingDisplay').innerText = `${progressPercent.toFixed(1)}%`;
+            document.getElementById('countingBar').style.width = `${progressPercent}%`;
+
+            let ranked = globalScores.map((score, index) => ({ score, ...candidatesConfig[index] })).sort((a, b) => b.score - a.score);
+
+            // --- Updated Podium HTML ---
+            const podiumDiv = document.getElementById('podiumSection');
+            if(ranked.length >= 3) {
+                podiumDiv.innerHTML = `
+                    <div class="podium-wrapper">
+                        <div class="podium-card rank-2" style="border-top-color: ${colorMap[ranked[1].no]}">
+                            <span class="rank-number" style="border-color:${colorMap[ranked[1].no]}">2</span>
+                            <img src="${ranked[1].imgSidebar}" class="podium-img" style="border-color:${colorMap[ranked[1].no]}">
+                            <div class="podium-score" style="color:${colorMap[ranked[1].no]}">${ranked[1].score.toLocaleString()}</div>
+                            <div class="podium-name text-truncate w-100">${ranked[1].name}</div>
+                            <div class="podium-party text-truncate w-100">${ranked[1].party}</div>
+                        </div>
+                        <div class="podium-card rank-1" style="border-top-color: ${colorMap[ranked[0].no]}">
+                            <span class="rank-number" style="border-color:${colorMap[ranked[0].no]}">1</span>
+                            <img src="${ranked[0].imgSidebar}" class="podium-img" style="border-color:${colorMap[ranked[0].no]}">
+                            <div class="podium-score" style="color:${colorMap[ranked[0].no]}">${ranked[0].score.toLocaleString()}</div>
+                            <div class="podium-name text-truncate w-100">${ranked[0].name}</div>
+                            <div class="podium-party text-truncate w-100">${ranked[0].party}</div>
+                        </div>
+                        <div class="podium-card rank-3" style="border-top-color: ${colorMap[ranked[2].no]}">
+                            <span class="rank-number" style="border-color:${colorMap[ranked[2].no]}">3</span>
+                            <img src="${ranked[2].imgSidebar}" class="podium-img" style="border-color:${colorMap[ranked[2].no]}">
+                            <div class="podium-score" style="color:${colorMap[ranked[2].no]}">${ranked[2].score.toLocaleString()}</div>
+                            <div class="podium-name text-truncate w-100">${ranked[2].name}</div>
+                            <div class="podium-party text-truncate w-100">${ranked[2].party}</div>
+                        </div>
+                    </div>`;
+            }
+
+            const listDiv = document.getElementById('restListSection');
+            listDiv.innerHTML = '';
+            for(let i=3; i<ranked.length; i++) {
+                let c = ranked[i];
+                listDiv.innerHTML += `
+                    <div class="rank-card" style="border-left-color: ${colorMap[c.no]};">
+                        <div class="rc-rank">#${i+1}</div>
+                        <img src="${c.imgSidebar}" class="rc-img" style="border-color: ${colorMap[c.no]};">
+                        <div class="rc-info">
+                            <div class="rc-name text-truncate">${c.name}</div>
+                            <div class="rc-party text-truncate">${c.party}</div>
+                        </div>
+                        <div class="rc-score" style="color:${colorMap[c.no]}">${c.score.toLocaleString()}</div>
+                    </div>`;
+            }
+        }
+
+        function renderTopUnits(unitsData) {
+            unitsData.sort((a, b) => b.voted - a.voted);
+            const container = document.getElementById('topUnitsSection');
+            container.innerHTML = '';
+            for(let i=0; i<5; i++) {
+                if(!unitsData[i]) break;
+                let u = unitsData[i];
+                let uRanked = u.scores.map((score, idx) => ({ score, ...candidatesConfig[idx] })).sort((a, b) => b.score - a.score);
+                let maxScore = uRanked[0].score > 0 ? uRanked[0].score : 1; 
+
+                let html = `
+                    <div class="unit-card">
+                        <div class="unit-header">
+                            <div class="unit-info-col">
+                                <div class="unit-name-scroll">${u.name}</div>
+                                <div class="unit-location"><i class="fas fa-map-marker-alt me-1 text-danger"></i>ต.${u.tambon} อ.${u.amphoe}</div>
+                            </div>
+                            <div class="unit-voted"><i class="fas fa-users me-1 text-primary"></i>${u.voted.toLocaleString()}</div>
+                        </div>
+                        <div class="unit-body">`;
+                for(let k=0; k<5; k++) {
+                    let c = uRanked[k];
+                    let barWidth = (c.score / maxScore) * 100;
+                    html += `
+                        <div class="unit-candidate-row">
+                            <div class="uc-rank">#${k+1}</div>
+                            <div class="uc-name" title="${c.name}">${c.name}</div>
+                            <div class="uc-bar-container"><div class="uc-bar" style="width:${barWidth}%; background-color:${colorMap[c.no]}"></div></div>
+                            <div class="uc-score">${c.score.toLocaleString()}</div>
+                        </div>`;
+                }
+                html += `</div></div>`;
+                container.innerHTML += html;
+            }
+        }
+    </script>
+</body>
+</html>
